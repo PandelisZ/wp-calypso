@@ -51,8 +51,8 @@ describe( 'WechatPaymentQRCode', () => {
 		expect( wrapper.find( '.checkout__wechat-qrcode-spinner' ) ).toHaveLength( 1 );
 		expect( wrapper.find( '.checkout__wechat-qrcode-redirect' ) ).toHaveLength( 1 );
 		expect( wrapper.find( '.checkout__wechat-qrcode' ) ).toHaveLength( 1 );
-		expect( wrapper.contains( <QRCode value={ defaultProps.redirect_url } /> ) );
-		expect( wrapper.contains( <QueryOrderTransaction /> ) );
+		expect( wrapper.contains( <QRCode value={ defaultProps.redirect_url } /> ) ).toBe( true );
+		expect( wrapper.contains( <QueryOrderTransaction /> ) ).toBe( true );
 	} );
 
 	test( 'transaction success triggers page change', () => {

@@ -102,7 +102,7 @@ describe( 'WechatPaymentBox', () => {
 		expect( wrapper.find( '.checkout__payment-box-section' ) ).toHaveLength( 1 );
 		expect( wrapper.find( '.checkout__payment-box-actions' ) ).toHaveLength( 1 );
 		expect( wrapper.find( '[name="name"]' ) ).toHaveLength( 1 );
-		expect( wrapper.contains( <TermsOfService /> ) );
+		expect( wrapper.contains( <TermsOfService /> ) ).toBe( true );
 	} );
 
 	const businessPlans = [ PLAN_BUSINESS, PLAN_BUSINESS_2_YEARS ];
@@ -117,7 +117,7 @@ describe( 'WechatPaymentBox', () => {
 				},
 			};
 			const wrapper = shallow( <WechatPaymentBox { ...props } /> );
-			expect( wrapper.contains( <PaymentChatButton /> ) );
+			expect( wrapper.contains( <PaymentChatButton /> ) ).toBe( true );
 		} );
 	} );
 
@@ -131,7 +131,7 @@ describe( 'WechatPaymentBox', () => {
 				},
 			};
 			const wrapper = shallow( <WechatPaymentBox { ...props } /> );
-			expect( ! wrapper.contains( <PaymentChatButton /> ) );
+			expect( wrapper.contains( <PaymentChatButton /> ) ).toBe( false );
 		} );
 	} );
 
@@ -161,7 +161,7 @@ describe( 'WechatPaymentBox', () => {
 				},
 			};
 			const wrapper = shallow( <WechatPaymentBox { ...props } /> );
-			expect( ! wrapper.contains( <PaymentChatButton /> ) );
+			expect( wrapper.contains( <PaymentChatButton /> ) ).toBe( false );
 		} );
 	} );
 
@@ -204,7 +204,7 @@ describe( 'WechatPaymentBox', () => {
 				<WechatPaymentBox { ...defaultProps } redirectUrl={ redirectUrl } isMobile={ false } />
 			);
 
-			expect( wrapper.contains( <WechatPaymentQRCode /> ) );
+			expect( wrapper.contains( <WechatPaymentQRCode /> ) ).toBe( true );
 		} );
 	} );
 } );
