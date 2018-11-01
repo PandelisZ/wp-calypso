@@ -148,7 +148,7 @@ export function getThemeForSiteGoals( siteGoals ) {
 	const siteGoalsValue = siteGoals.split( ',' );
 
 	if ( siteGoalsValue.indexOf( 'sell' ) !== -1 ) {
-		return 'pub/dara';
+		return 'pub/twentyfifteen';
 	}
 
 	if ( siteGoalsValue.indexOf( 'promote' ) !== -1 ) {
@@ -170,7 +170,7 @@ export function getSiteTypeForSiteGoals( siteGoals, flow ) {
 	const siteGoalsValue = siteGoals.split( ',' );
 
 	//Identify stores for the store signup flow
-	if ( siteGoals === 'sell' || flow === 'store-nux' ) {
+	if ( siteGoals === 'sell' || flow === 'ecommerce' ) {
 		return 'store';
 	}
 
