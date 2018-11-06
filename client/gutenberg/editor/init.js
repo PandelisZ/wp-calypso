@@ -21,6 +21,18 @@ const WPCOM_UNSUPPORTED_CORE_BLOCKS = [
 	'core/file', // see D19851 for more details.
 ];
 
+const loadA8CExtensions = () => {
+	require( '../extensions/classic-block/editor' );
+
+	if ( isEnabled( 'gutenberg/block/jetpack-preset' ) ) {
+		require( 'gutenberg/extensions/presets/jetpack/editor.js' );
+	}
+
+	if ( isEnabled( 'gutenberg/block/simple-payments' ) ) {
+		require( 'gutenberg/extensions/simple-payments/editor.js' );
+	}
+};
+
 // We need to ensure that his function is executed only once to avoid duplicate
 // block registration, API middleware application etc.
 export const initGutenberg = once( ( userId, siteSlug ) => {
@@ -46,10 +58,6 @@ export const initGutenberg = once( ( userId, siteSlug ) => {
 	debug( 'Removing core blocks that are not yet supported in Calypso' );
 	WPCOM_UNSUPPORTED_CORE_BLOCKS.forEach( blockName => unregisterBlockType( blockName ) );
 
-	debug( 'Registering Calypso Classic Block handler' );
-	require( '../extensions/classic-block/editor' );
-	setFreeformContentHandlerName( 'a8c/classic' );
-
 	// Needed for list block indent/outdent functionality
 	debug( 'Loading required TinyMCE plugins' );
 	require( 'tinymce/plugins/lists/plugin.js' );
@@ -60,14 +68,11 @@ export const initGutenberg = once( ( userId, siteSlug ) => {
 	debug( 'Applying API middleware' );
 	applyAPIMiddleware( siteSlug );
 
-	debug( 'Load A8C editor extensions' );
-	if ( isEnabled( 'gutenberg/block/jetpack-preset' ) ) {
-		require( 'gutenberg/extensions/presets/jetpack/editor.js' );
-	}
+	debug( 'Loading A8C editor extensions' );
+	loadA8CExtensions();
 
-	if ( isEnabled( 'gutenberg/block/simple-payments' ) ) {
-		require( 'gutenberg/extensions/simple-payments/editor.js' );
-	}
+	debug( 'Registering Calypso Classic Block handler' );
+	setFreeformContentHandlerName( 'a8c/classic' );
 
 	debug( 'Gutenberg editor initialization complete.' );
 
